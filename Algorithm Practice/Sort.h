@@ -13,7 +13,6 @@ void BubbleSort(int ary[], int begin, int end) {
 		for (int j = begin; j < end; j++) {
 			if (ary[j] > ary[j + 1])
 				Swap(&ary[j], &ary[j + 1]);
-
 		}
 	}
 	return;
@@ -44,7 +43,7 @@ void InsertionSort(int ary[], int begin, int end) {
 
 //Radix Sort(기수 정렬)
 void RadixSort(int ary[], int begin, int end) {
-	queue<int> que[10];
+	std::queue<int> que[10];
 	int max = -1;
 	for (int i = begin; i <= end; i++)
 		max = max > ary[i] ? max : ary[i];
@@ -111,20 +110,39 @@ void HeapSort(int ary[], int begin, int end) {
 	return;
 }
 
-//Merge Sort(분할 정렬)
-void Merge(int ary[], int right, int mid, int left) {
-
-
-
-
+//Merge Sort(합병 정렬)
+void Merge(int ary[], int begin,int mid, int end) {
+	std::queue<int> mer;
+	int l = begin;
+	int r = mid;
+	while (l < mid || r <= end) {
+		if (l >= mid) {
+			mer.push(ary[r++]);
+			continue;
+		}
+		if (r > end) {
+			mer.push(ary[l++]);
+			continue;
+		}
+		if (ary[l] < ary[r]) 
+			mer.push(ary[l++]);
+		else
+			mer.push(ary[r++]);
+	}
+	for (int i = 0; i <= end - begin; i++) {
+		ary[begin + i] = mer.front();
+		mer.pop();
+	}
 	return;
 }
 
 void MergeSort(int ary[], int begin, int end) {
-
-
-
-
+	if (begin < end) {
+		int mid = (begin + end) / 2;
+		MergeSort(ary, begin, mid);
+		MergeSort(ary, mid + 1, end);
+		Merge(ary, begin, mid + 1, end);
+	}
 	return;
 }
 
