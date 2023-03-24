@@ -23,7 +23,7 @@ void SelectionSort(int ary[], int begin, int end) {
 	for (int i = begin; i <= end; i++) {
 		int min = i;
 		for (int j = i + 1; j <= end; j++) {
-			if (min == -1 || ary[min] > ary[j])min = j;
+			if (ary[min] > ary[j])min = j;
 		}
 		Swap(&ary[min], &ary[i]);
 	}
@@ -145,4 +145,3 @@ void MergeSort(int ary[], int begin, int end) {
 	}
 	return;
 }
-
